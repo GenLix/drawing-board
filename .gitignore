@@ -1,0 +1,16 @@
+# Publish only the application, its required assets, and public project metadata.
+# Research, local tests, recordings, downloads, and generated exports stay local.
+/*
+!/.gitignore
+!/README.md
+!/LICENSE
+!/index.html
+!/style.css
+!/app.mjs
+!/core.mjs
+!/renderer.mjs
+!/export.mjs
+!/assets/
+/assets/*
+!/assets/hand-pen.png
+!/assets/LICENSE-hand.txt

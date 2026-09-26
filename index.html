@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ed"><title>描画 · 单画面绘制实验室</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23b45e3e'/%3E%3Cpath d='M8 24L23 8M8 24l6-2' stroke='%23fffdf8' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a href="./" class="brand" aria-label="描画首页"><span class="brand-mark">〆</span><strong>描画</strong><span class="brand-en">DRAWBOARD</span></a>
+  <span class="local-badge"><i></i> 本地画面实验室</span>
+  <div class="project-actions"><button id="new-project">新建画面</button><button id="open-project">打开项目</button><button id="save-project">保存项目</button><button id="export-html" class="dark">导出 HTML <span aria-hidden="true">↗</span></button></div>
+</header>
+<main>
+  <section class="intro"><div><p class="eyebrow">ONE SCENE. YOUR OWN RHYTHM.</p><h1>让画面，一笔一笔成形<span>。</span></h1></div><p>排好画面，选择笔触。<br>剩下的，交给你的讲述节奏。</p></section>
+  <div class="workbench">
+    <aside class="layers panel" aria-label="画面元素">
+      <div class="panel-heading"><h2>画面元素</h2><span id="item-count" class="count">6</span></div>
+      <div class="add-buttons"><button id="add-image">＋ 图片</button><button id="add-text">＋ 文字</button><button id="draw-ink" aria-pressed="false">⌁ 画笔</button></div>
+      <p class="micro">按列表顺序绘制，也可以同时开始</p>
+      <ol id="layers"></ol>
+      <div class="layer-actions"><button id="move-up" title="提前绘制" aria-label="提前绘制">↑</button><button id="move-down" title="延后绘制" aria-label="延后绘制">↓</button><button id="delete-item" class="delete">删除元素</button></div>
+      <div class="sidebar-note"><span>从你的素材开始</span><p>支持 PNG、JPG、WebP。<br>图片只在本机读取。</p></div>
+    </aside>
+    <section class="stage-panel" aria-label="画面预览与播放">
+      <div class="stage-toolbar"><span><i class="live-dot"></i> 单画面预览</span><span class="mono">1280 × 720</span><button id="fit-view" title="显示全部元素">查看完整画面</button></div>
+      <div class="stage-area"><div class="canvas-shell" id="canvas-shell">
+        <canvas id="scene" width="1280" height="720" aria-label="单画面绘制预览；使用左侧列表选择并通过右侧属性编辑元素"></canvas>
+        <canvas id="ink" width="1280" height="720" aria-label="自由画笔区域" hidden></canvas>
+        <div id="selection" hidden><span id="selection-name"></span></div>
+      </div></div>
+      <div class="transport">
+        <button id="restart" class="icon-button" aria-label="回到开头" title="回到开头">↶</button>
+        <button id="play" class="play" aria-label="播放预览">▶ <span>播放预览</span></button>
+        <span id="clock" class="mono">0.0 / 0.0 s</span>
+        <label class="speed">速度 <select id="speed" aria-label="播放速度"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
+      </div>
+      <div class="timeline"><div id="timeline-blocks" aria-hidden="true"></div><input id="scrubber" type="range" min="0" max="10" step="0.01" value="0" aria-label="动画进度"><div class="timeline-labels"><span>0 s</span><span>拖动进度，查看每一笔</span><span id="end-time">0 s</span></div></div>
+      <div class="scene-footer"><span id="play-state">画面就绪</span><span>单画面 · 可随时回看</span></div>
+    </section>
+    <aside class="properties panel" aria-label="元素属性">
+      <div class="panel-heading"><h2>绘制设置</h2><span class="tiny-symbol">↗</span></div>
+      <form id="properties" autocomplete="off">
+        <label>元素名称<input id="name" maxlength="120"></label>
+        <div id="text-fields" hidden><label>文字内容<textarea id="text" rows="3" maxlength="1000"></textarea></label><label>字号<input id="fontSize" type="number" min="10" max="200" step="1"></label></div>
+        <div class="section-label">笔触与方向</div>
+        <label>绘制效果<select id="effect"><option value="brush">涂刷显现</option><option value="sand">沙粒显现</option><option value="stroke">逐笔描线</option></select></label>
+        <label>推进方向<select id="direction"></select></label>
+        <label>绘制工具<select id="pointer"><option value="hand">手持笔 · 真实图片</option><option value="none">不显示</option></select></label>
+        <p id="effect-note" class="field-note"></p>
+        <div class="two-col"><label>笔刷粗细<input id="brush" type="number" min="1" max="150" step="0.5"></label><label>笔迹颜色<input id="color" type="color"></label></div>
+        <div class="section-label">讲述节奏</div>
+        <label>开始方式<select id="join"><option value="after">接在上一项之后</option><option value="with">与上一项同时开始</option></select></label>
+        <div class="two-col"><label>绘制 / 秒<input id="duration" type="number" min="0.1" max="30" step="0.1"></label><label>画前延迟 / 秒<input id="delay" type="number" min="0" max="30" step="0.1"></label></div>
+        <label>画后停顿 / 秒<input id="hold" type="number" min="0" max="600" step="0.1"></label>
+        <p class="field-note">画完后保持画面，再继续下一项。并行开始的元素不受这段停顿限制。</p>
+        <div class="section-label">画面位置</div>
+        <div class="two-col"><label>X<input id="x" type="number" min="0" max="1272" step="1"></label><label>Y<input id="y" type="number" min="0" max="712" step="1"></label><label>宽度<input id="width" type="number" min="8" max="1280" step="1"></label><label>高度<input id="height" type="number" min="8" max="720" step="1"></label></div>
+      </form>
+      <p id="empty-selection" class="field-note" hidden>添加或选择一个元素，开始绘制。</p>
+    </aside>
+  </div>
+  <footer class="page-footer"><p id="status" role="status">示例已就绪。点击播放，或导入自己的图片。</p><span>DRAWBOARD / PROTOTYPE 02</span></footer>
+</main>
+<input type="file" id="image-file" accept="image/png,image/jpeg,image/webp" multiple hidden>
+<input type="file" id="project-file" accept="application/json,.json" hidden>
+<script type="module" src="app.mjs"></script>
+</body>
+</html>
