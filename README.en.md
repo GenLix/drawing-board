@@ -8,9 +8,9 @@ Built for presentations, visual explanations, and individual scenes in short vid
 
 ## Demo
 
-[![A nine-second demo showing a handwritten title, a brush reveal, a pause, and a sand reveal](assets/demo.gif)](assets/demo.mp4)
+[![A nine-second demo showing a handwritten title, a brush reveal, a pause, and a sand reveal](assets/demo.gif)](assets/demo.mp4?raw=true)
 
-[Watch the full MP4](assets/demo.mp4) · About 9 seconds · 1280 × 720 · Silent. Rendered from the built-in demo scene with HyperFrames.
+[Download the full MP4](assets/demo.mp4?raw=true) · About 9 seconds · 1280 × 720 · Silent. The GIF above plays inline; the video was rendered from the built-in demo scene with HyperFrames.
 
 ## Features
 

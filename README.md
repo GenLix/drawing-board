@@ -8,9 +8,9 @@
 
 ## 效果演示
 
-[![约 9 秒的绘制演示：手写标题、图片涂刷、停顿和沙粒显现](assets/demo.gif)](assets/demo.mp4)
+[![约 9 秒的绘制演示：手写标题、图片涂刷、停顿和沙粒显现](assets/demo.gif)](assets/demo.mp4?raw=true)
 
-[观看完整 MP4](assets/demo.mp4) · 约 9 秒 · 1280 × 720 · 无声。使用本项目的示例场景，通过 HyperFrames 渲染。
+[下载完整 MP4](assets/demo.mp4?raw=true) · 约 9 秒 · 1280 × 720 · 无声。上方动图可直接预览；视频使用本项目的示例场景，通过 HyperFrames 渲染。
 
 ## 可以做什么
 
