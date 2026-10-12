@@ -1,8 +1,16 @@
 # 描画 · Drawing Board
 
+[简体中文](README.md) | [English](README.en.md)
+
 一个在浏览器里运行的单画面白板手绘动画工具。把图片、文字和自由笔画放到同一张画布上，自由安排位置、绘制顺序和停顿，让画面随着讲解逐步展开。
 
 适合演示讲解、知识说明和短视频中的单个画面。使用原生 HTML、CSS、JavaScript 和 Canvas，无需安装前端依赖，也没有后端服务；导入的图片和项目在本机处理。
+
+## 效果演示
+
+[![约 9 秒的绘制演示：手写标题、图片涂刷、停顿和沙粒显现](assets/demo.gif)](assets/demo.mp4)
+
+[观看完整 MP4](assets/demo.mp4) · 约 9 秒 · 1280 × 720 · 无声。使用本项目的示例场景，通过 HyperFrames 渲染。
 
 ## 可以做什么
 
@@ -71,7 +79,7 @@ npx hyperframes@0.8.65 render . -o drawing-board.mp4
 | `core.mjs` | 项目校验、绘制时序、轨迹和示例数据。 |
 | `renderer.mjs` | 按指定时间绘制 Canvas，并加载图片素材。 |
 | `export.mjs` | 打包独立 HTML 播放文件。 |
-| `assets/` | 手持笔图片及其来源、许可。 |
+| `assets/` | 手持笔图片及其来源、许可，以及演示视频和动图。 |
 
 外部工具可以等待 `window.drawingBoard.ready`，再调用 `window.drawingBoard.renderAt(seconds)` 定位画面；通过 `canvas` 获取纯画面，通过 `getProject()` 获取项目数据，通过 `duration` 获取总时长。时间单位为秒。
 

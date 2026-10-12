@@ -3,6 +3,7 @@
 /*
 !/.gitignore
 !/README.md
+!/README.en.md
 !/LICENSE
 !/index.html
 !/style.css
@@ -14,3 +15,5 @@
 /assets/*
 !/assets/hand-pen.png
 !/assets/LICENSE-hand.txt
+!/assets/demo.mp4
+!/assets/demo.gif
